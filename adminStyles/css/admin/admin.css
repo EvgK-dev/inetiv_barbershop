@@ -1,0 +1,13 @@
+.form-row input {
+    max-width: 250px;
+}
+
+textarea {
+    max-width: 250px;
+    height: 80px;
+}
+
+.submit-row input {
+    max-width: 300px;
+}
+

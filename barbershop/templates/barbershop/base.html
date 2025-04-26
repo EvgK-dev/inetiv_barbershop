@@ -1,0 +1,147 @@
+{% load static %}  
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>iNetiv.com - barbershop</title>
+        <link rel="icon" type="image/png" href="{% static 'barbershop/img/icon_marks.png' %}">
+
+        <link type="text/css" href="{% static 'barbershop/css/null.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/font.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/header.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/main.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/other_blocks.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/footer.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/mobile_style.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/slider_main.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/dropdownmenu.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/form.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/photo_slider.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/marketing.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/header.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/main.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/other_blocks.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/footer.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/mobile_style.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/slider_main.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/dropdownmenu.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/form.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/photo_slider.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/marketing.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/booking.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/verify.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'barbershop/css/delayedLoading.css' %}" rel="stylesheet" />
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+
+		{% block header %}
+        <header class="header">
+            <section class="header_info_block">
+                {% if data %}
+                <div class="header_preview">
+        
+                    <a href="{{ location }}" class="header_preview_block">
+                        <img src="{% static 'barbershop/img/header_img/geolocation.png' %}" alt="geolocation">
+                        
+                        <div class="header_preview_mini_block">
+                            <p>Адрес</p>
+                            <p>{{ data.address |safe }}</p>
+                        </div>  
+                    </a>
+        
+                    <a href="tel:+74951234567" class="header_preview_block">
+                        <img src="{% static 'barbershop/img/header_img/phone.png' %}" alt="phone">
+                        
+                        <div class="header_preview_mini_block">
+                            <p>Телефон</p>
+                            <p href="tel:{{ data.phone }}">{{ data.phone |safe }}</p>
+                        </div>  
+                    </a>
+        
+                    <a href="{{ work_time }}" class="header_preview_block">
+                        <img src="{% static 'barbershop/img/header_img/time.png' %}" alt="time_work">
+                        
+                        <div class="header_preview_mini_block">
+                            <p>Режим работы</p>
+                            <p>{{ data.working_hours |safe }}</p>
+                        </div>  
+                    </a>
+        
+                </div>
+                {% else %}
+                    <p>Данные отсутствуют.</p>
+                {% endif %}
+    
+            </section>
+    
+            <section class="header_menu_block">
+                <div class="header_menu_wrapper">
+                    <a href="{% url 'barbershop' %}" class="header_logo_block">
+                        <img src="{% static 'barbershop/img/header_img/logo1.png' %}" alt="inetiv_barber_logo">
+                        <p class="header_logo_text">"Интроверт"</p>
+                    </a>
+
+                    <nav class="header__menu"> 
+                        <ul class="header__list">
+                            <li><a href="{% url 'barbershop' %}">ГЛАВНАЯ</a></li>
+                            <li><a href="{{ main_services }}">УСЛУГИ</a></li>
+                            <li><a href="{{ main_masters }}">МАСТЕРА</a></li>
+                            <li><a href="{% url 'barberbooking' %}">ЗАПИСЬ</a></li>
+                            <li><a href="{{ main_contact }}">КОНТАКТЫ</a></li>
+                            <li><a href="{{ main_foto }}">ФОТО</a></li>
+                            <li><a href="{{ main_feedback }}">ОТЗЫВЫ</a></li>
+                        </ul>
+                    </nav> 
+
+                    <div class="header__burger"> 
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </section>
+
+        </header>
+		{% endblock header %}
+
+
+		{% block main %}
+	
+		{% endblock main %}
+
+
+        {% block footer %}
+        <footer class="footer">
+            <div class="wrapper">
+                <div class="main_footer">
+                    <a class="footer_title" href="{% url 'barbershop' %}">
+                        <img loading="lazy" src="{% static 'barbershop/img/logo2.png' %}" alt="inetiv.com_title_barbershop">
+                        <p>БАРБЕРШОП "ИНТРОВЕРТ</p>
+                    </a>
+
+                    <a class="privacy_policy_link" href="{% url 'privacy_policy' %}">
+                        Политика конфиденциальности
+                    </a>
+        
+                    <div class="footer_links">
+                        <a href="{% url 'barbershop' %}" class="footer_link">ГЛАВНАЯ</a>
+                        <a href="{{booking}}" class="footer_link">ЗАПИСЬ</a>
+                        <a href="{{ main_contact }}" class="footer_link">КОНТАКТЫ</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inetiv_com_link">
+                <p class="footer_copyright">Ⓒ Все права защищены</p>
+                <div class="footer_authors_link">
+                    <a href="https://inetiv.com/" class="website_developer">iNetiV.com </a>
+                    <a href="https://inetiv.com/" id="textwritter"></a>
+                </div>
+            </div>
+        </footer>
+        {% endblock footer %}
+	</body>
+</html>

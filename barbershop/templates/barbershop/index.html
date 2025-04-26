@@ -1,0 +1,379 @@
+{% extends 'barbershop/base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<main class="main">   
+    <section class="main_block_conteiner">
+        <div class="wrapper">
+            <section class="main_block active">
+                <div class="main_block_info_block">
+
+                    <div class="main_block_logo">
+                        <img src="{% static 'barbershop/img/logo2.png' %}" alt="inetiv.com">
+                        <h1 class="main_block_logo_text">БАРБЕРШОП <br> "ИНТРОВЕРТ"</h1>
+                    </div>
+
+                    <p class="main_block_text">"От классики до <br> экстрима — <br><span class="color_gold">подчеркиваем твою <br> индивидуальность</span>"</p>
+                    <a class="main_block_link" href="{{booking}}">ЗАПИСАТЬСЯ</a>
+                </div>
+
+                <section class="main_block_img">
+                    <img 
+                        src="{% static 'barbershop/img/main_block/inetiv_com_man.png' %}" 
+                        alt="inetiv_com"
+                        srcset="
+                            {% static 'barbershop/img/main_block/inetiv_com_man_1.png' %} 500w,
+                            {% static 'barbershop/img/main_block/inetiv_com_man_1.png' %} 1000w,
+                            {% static 'barbershop/img/main_block/inetiv_com_man.png' %} 1500w
+                        "
+                    >
+                </section>
+            </section>
+
+            <section class="main_block">
+                <div class="main_block_info_block">
+
+                    <div class="main_block_logo">
+                        <img src="{% static 'barbershop/img/logo2.png' %}" alt="inetiv.com">
+                        <p class="main_block_logo_text">БАРБЕРШОП <br> "ИНТРОВЕРТ"</p>
+                    </div>
+                    <p class="main_block_text">"Панк не умер, <br> <span class="color_gold">он просто нашел <br>свой стиль</span>"</p>
+                    <a class="main_block_link" href="{{booking}}">ЗАПИСАТЬСЯ</a>
+
+                </div>
+
+                <section class="main_block_img">
+                    <img 
+                        src="{% static 'barbershop/img/main_block/inetiv_com_man2.png' %}" 
+                        alt="inetiv_com"
+                        srcset="
+                            {% static 'barbershop/img/main_block/inetiv_com_man_2.png' %} 500w,
+                            {% static 'barbershop/img/main_block/inetiv_com_man2.png' %} 1000w,
+                            {% static 'barbershop/img/main_block/inetiv_com_man2.png' %} 1500w
+                        "
+                    >
+                </section>
+            </section>
+
+            <section class="main_block">
+                <div class="main_block_info_block">
+
+                    <div class="main_block_logo">
+                        <img src="{% static 'barbershop/img/logo2.png' %}" alt="inetiv.com">
+                        <p class="main_block_logo_text">БАРБЕРШОП <br> "ИНТРОВЕРТ"</p>
+                    </div>
+
+                    <p class="main_block_text">"Твоя уникальность <br> — наша работа, <br><span class="color_gold">будь то борода <br>или бритая голова</span>"</p>
+                    <a class="main_block_link" href="{{booking}}">ЗАПИСАТЬСЯ</a>
+
+                </div>
+
+                <section class="main_block_img">
+                    <img 
+                        src="{% static 'barbershop/img/main_block/inetiv_com_man3.png' %}" 
+                        alt="inetiv_com"
+                        srcset="
+                            {% static 'barbershop/img/main_block/inetiv_com_man_3.png' %} 500w,
+                            {% static 'barbershop/img/main_block/inetiv_com_man3.png' %} 1000w,
+                            {% static 'barbershop/img/main_block/inetiv_com_man3.png' %} 1500w
+                        "
+                    >
+                </section>
+            </section>
+        </div>
+
+        <div class="slider-indicators">
+            <span class="dot_main active"></span>
+            <span class="dot_main"></span>
+            <span class="dot_main"></span>
+        </div>
+    </section>
+
+    <section class="services" id="services_list">
+        <div class="wrapper">
+
+            <div class="block_title animation-bottom-to-up">
+                <img src="{% static 'barbershop/img/services/icons_line1.png' %}" alt="inetiv.com{{ service.service_name }}">
+                <h2 class="block_title_main_text">МЫ СОЗДАЕМ СТИЛЬ</h2>
+                <h4 class="block_title_second_text">Четко, стильно, без компромиссов</h4>
+                <img src="{% static 'barbershop/img/services/icons_line2.png' %}" alt="inetiv.com_line2">
+            </div>
+
+            <div class="services_list">
+                {% if services %}
+                {% for service in services %}
+
+                <a href="{% url 'barberbooking' %}" class="service_block animation-bottom-to-up">
+                    <img loading="lazy" src="{{ service.service_image.url }}" alt="inetiv.com_{{ service.service_name }}">
+                    <h3>{{ service.service_name | safe }}</h3>
+                    <h4 class="block_title_second_text service_second_text_parametrs">{{ service.service_description |safe }}</h4>
+                    <p class="service_price">{{ service.service_price_time |safe }}</p>
+                </a>
+
+                {% endfor %}
+                {% else %}
+                    <p>Данные отсутствуют.</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+
+    <section class="masters" id="masters_block">
+        <div class="wrapper">
+
+             <div class="block_title animation-bottom-to-up">
+                <img loading="lazy" src="{% static 'barbershop/img/services/icons_line1.png' %}" alt="inetiv.com">
+                <h2 class="block_title_main_text">МАСТЕРА СВОЕГО ДЕЛА</h2>
+                <h4 class="block_title_second_text">Опыт, внимание и идеальный результат</h4>
+                <img src="{% static 'barbershop/img/services/icons_line2.png' %}" alt="inetiv.com_line2">
+            </div>
+
+            <div class="masters_block" >
+
+                {% for master in masters %}
+                    <div class="master_block animation-left-to-right">
+                        <div class="master_img">
+                            <img loading="lazy" src="{{ master.large_photo.url }}" alt="Photo of {{ master.name }}">
+                        </div>
+            
+                        <div class="master_name">
+                            <p>{{ master.name }}</p>
+                        </div>
+            
+                        <p class="master_position">{{ master.specialty }}</p>
+            
+                        <div class="master_social_network">
+                            {% for contact in master.contact_set.all %}
+                                {% if contact.phone %}
+                                    <a href="tel:{{ contact.phone }}">
+                                        <img src="{% static 'barbershop/img/masters/icons-телефон.png' %}" alt="Phone">
+                                    </a>
+                                {% endif %}
+                                {% if contact.telegram %}
+                                    <a href="{{ contact.telegram }}">
+                                        <img src="{% static 'barbershop/img/masters/icons-телеграм.png' %}" alt="Telegram">
+                                    </a>
+                                {% endif %}
+                                {% if contact.instagram %}
+                                    <a href="{{ contact.instagram }}">
+                                        <img src="{% static 'barbershop/img/masters/icons-instagram.png' %}" alt="Instagram">
+                                    </a>
+                                {% endif %}
+                                {% if contact.tiktok %}
+                                    <a href="{{ contact.tiktok }}">
+                                        <img src="{% static 'barbershop/img/masters/icons-тикток.png' %}" alt="TikTok">
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <a class="main_block_link" href="{{booking}}">ЗАПИСАТЬСЯ</a>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+    <section class="frequent_questions">
+        <div class="wrapper">
+
+            <div class="block_title animation-bottom-to-up">
+               <img loading="lazy" src="{% static 'barbershop/img/services/icons_line1.png' %}" alt="inetiv.com_line1">
+               <h2 class="block_title_main_text">ЧАСТО СПРАШИВАЮТ</h2>
+               <h4 class="block_title_second_text">Мы подготовили ответы заранее</h4>
+               <img loading="lazy" src="{% static 'barbershop/img/services/icons_line2.png' %}" alt="inetiv.com_line2">
+           </div>
+
+            <div class="questions_wrapper">
+                <div class="faq">
+                                        
+                    {% if faqs %}
+                    {% for faq in faqs %}
+                    <div class="question ">
+                        <div class="question_conteiner">
+                            <h3 >{{ faq.question | safe }}</h3>
+                            <span class="plus animation-right-to-left">+</span>
+                        </div>
+                    
+                        <div class="answer">
+                            <p>{{ faq.answer | safe }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                        <p>вопросы отсутствуют</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contacts">
+        <div class="wrapper">
+
+             <div class="block_title animation-bottom-to-up">
+                <img loading="lazy" src="{% static 'barbershop/img/services/icons_line1.png' %}" alt="inetiv.com_line1">
+                <h2 class="block_title_main_text">ОСТАЛИСЬ ВОПРОСЫ?</h2>
+                <h4 class="block_title_second_text">Напиши нам сообщение</h4>
+                <img loading="lazy" src="{% static 'barbershop/img/services/icons_line2.png' %}" alt="inetiv.com_line2">
+            </div>
+
+            <div class="contacts_main_container" id="contacts_info">
+
+                <div class="contacts_info" >
+                    {% if data %}
+                    <div class="main_block_logo animation-bottom-to-up">
+                        <img loading="lazy" src="{% static 'barbershop/img/logo2.png' %}" alt="inetiv.com">
+                        <h1 class="main_block_logo_text">БАРБЕРШОП <br> "ИНТРОВЕРТ"</h1>
+                    </div>
+
+                    <div class="contacts_about_us animation-bottom-to-up">
+                        <a href="#contacts_info" class="contact_preview_block">
+                            <img loading="lazy" src="{% static 'barbershop/img/header_img/geolocation.png' %}" alt="geolocation">
+                            
+                            <div class="contact_preview_mini_block">
+                                <p>Адрес</p>
+                                <p>{{ data.address |safe }}</p>
+                            </div>  
+                        </a>
+            
+                        <a href="tel:+74951234567" class="contact_preview_block">
+                            <img loading="lazy"  src="{% static 'barbershop/img/header_img/phone.png' %}" alt="phone">
+                            
+                            <div class="contact_preview_mini_block">
+                                <p>Телефон</p>
+                                <p href="tel:{{ data.phone |safe }}">{{ data.phone |safe }}</p>
+                            </div>  
+                        </a>
+            
+                        <a href="#masters_block" class="contact_preview_block">
+                            <img loading="lazy"  src="{% static 'barbershop/img/header_img/time.png' %}" alt="time_work">
+                            
+                            <div class="contact_preview_mini_block">
+                                <p>Режим работы</p>
+                                <p>{{ data.working_hours |safe }}</p>
+                            </div>  
+                        </a>
+                    </div>
+
+                    <div style="position:relative;overflow:hidden;" class="yan_maps" id="yan_maps"><!--yandex maps--></div>
+
+                    {% else %}
+                        <p>Данные отсутствуют.</p>
+                    {% endif %}
+                </div>
+
+                <div class="contact_form_block">
+
+                    <div class="feedback_form_conteiner">
+                        <img loading="lazy" class="feedback_form_icon animation-bottom-to-up" src="{% static 'barbershop/img/form-icon.png' %}" alt="">
+
+                        <p class="form_title_text">Закажите <span class="color_gold">бесплатную консультацию</span> наших специалистов:</p>
+        
+                        <div class="form-container">
+                            <form action="{% url 'send_telegram_message' %}" class="form" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="text" id="name" name="name" placeholder="Введите своё имя" maxlength="20" required>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <input type="tel" id="phone" name="phone" placeholder="Укажите телефон" maxlength="20" pattern = "\+?\s*\d+(\s+\d+)*" title="Номер телефона может содержать только цифры" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" placeholder="Введите email" maxlength="100" required>
+                                </div>
+
+                            
+                                <div class="form-group">
+                                    <input type="text" id="comment" name="comment" placeholder="Добавьте комментарий" maxlength="200" required>
+                                </div>
+
+                                <button class="main_block_link form_button" type="submit">отправить</button>
+                            </form>
+                        </div>
+
+                        <img loading="lazy" class="feedback_form_icon animation-bottom-to-up" src="{% static 'barbershop/img/form-icon.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="photo_galery" id="photo_galery">
+        <div class="wrapper">
+            <div class="block_title animation-bottom-to-up">
+                <img loading="lazy" src="{% static 'barbershop/img/services/icons_line1.png' %}" alt="inetiv.com_line1">
+                <h2 class="block_title_main_text">ГАЛЕРЕЯ СТИЛЯ</h2>
+                <h4 class="block_title_second_text">Образы, которые говорят сами за себя</h4>
+                <img loading="lazy" src="{% static 'barbershop/img/services/icons_line2.png' %}" alt="inetiv.com_line2">
+            </div>
+            
+            <div class="photo_galery_conteiner">
+                <img loading="lazy" id="photo_slider_line_left" class="photo_slider_line" src="{% static 'barbershop/img/photo_slider/line_left_icon.png' %}" alt="inetiv.com_line_left">
+                <div id="slider-container">
+
+                    <div class="slider" id="slider">
+                        {% if slider_images %}
+                        {% for im in slider_images %}
+                        <div class="slide"><img loading="lazy" class="photo_slide" src="{{ im.image.url }}" alt="inetiv.com_man"></div>
+                        {% endfor %}
+                        {% else %}
+                        <p>Слайды отсутствуют</p>
+                        {% endif %}
+                    </div>
+                
+                    <div class="pagination" id="pagination"></div>
+                </div>
+                <img loading="lazy" id="photo_slider_line_right" class="photo_slider_line" src="{% static 'barbershop/img/photo_slider/line_right_icon.png' %}" alt="inetiv.com_line_right">
+            </div>
+        </div>
+    </section>
+
+    <section class="feedbacks" id="main_feedback">
+        <div class="wrapper">
+            <div class="block_title animation-bottom-to-up">
+                <img loading="lazy"  src="{% static 'barbershop/img/services/icons_line1.png' %}" alt="inetiv.com_line1">
+                <h2 class="block_title_main_text">ГОЛОСА КЛИЕНТОВ</h2>
+                <h4 class="block_title_second_text">Мы ценим каждое мнение</h4>
+                <img loading="lazy"  src="{% static 'barbershop/img/services/icons_line2.png' %}" alt="inetiv.com_line2">
+            </div>
+
+            <div class="feedback_conteiner">
+
+                {% if reviews %}
+                {% for review in reviews %}
+                    <div class="feedback animation-bottom-to-up">
+                        <img loading="lazy"  src="{% static 'barbershop/img/icon_marks.png' %}" alt="inetic.com_icon_marks">
+                        <img loading="lazy"  class="feedback_person" src="{{ review.avatar.url }}" alt="Avatar">
+                        <p class="feedback_customer">{{ review.name }}</p>
+                        <p class="feedback_text">{{ review.review_text }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Отзывов пока нет.</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+
+
+    <script src="{% static 'barbershop/js/main.js' %}"></script>      
+    <script src="{% static 'barbershop/js/dropdownmenu.js' %}"></script>      
+    <script src="{% static 'barbershop/js/photo_slider.js' %}"></script>      
+    <script src="{% static 'barbershop/js/slider_main.js' %}"></script>  
+    <script src="{% static 'barbershop/js/textwritter.js' %}"></script>  
+    <script src="{% static 'barbershop/js/yandex.js' %}"></script>  
+    <script src="{% static 'barbershop/js/delayedLoading.js' %}"></script>  
+
+    
+</main>
+
+{% endblock main %}
+

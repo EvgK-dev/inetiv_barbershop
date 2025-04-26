@@ -1,0 +1,43 @@
+.animation-bottom-to-up {
+  opacity: 0;
+  transform: translateY(99%);
+}
+
+.animation-bottom-to-up.element-show {
+  opacity: 1;
+  transition: all 1s;
+  transform: translateY(0%);
+}
+
+.animation-right-to-left {
+  opacity: 0;
+  transform: translateX(99%);
+}
+
+.animation-right-to-left.element-show {
+  opacity: 1;
+  transition: all 1s;
+  transform: translateX(0%);
+}
+
+.animation-left-to-right {
+  opacity: 0;
+  transform: translateX(-99%);
+}
+
+.animation-left-to-right.element-show {
+  opacity: 1;
+  transition: all 1s;
+  transform: translateX(0%);
+}
+
+.animation-top-to-bottom {
+  opacity: 0;
+  transform: translateY(-99%);
+}
+
+.animation-top-to-bottom.element-show {
+  opacity: 1;
+  transition: all 1s;
+  transform: translateY(0%);
+}

@@ -1,0 +1,48 @@
+{% extends 'barbershop/base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<main class="main">   
+    <section class="booking">
+        <section class="booking_conteiner">
+            <div class="wrapper">
+
+                 <div class="block_title">
+                    <img src="{% static 'barbershop/img/services/icons_line1.png' %}" alt="inetiv.com">
+                    <h2 class="block_title_main_text">СТАТУС ЗАПИСИ</h2>
+                    <h4 class="block_title_second_text">Давайте убедимся, что все готово для вашего визита!</h4>
+                    <img src="{% static 'barbershop/img/services/icons_line2.png' %}" alt="inetiv.com_line2">
+                </div>
+
+                <section class="confirmation_block">
+                    <h2 class="confirmation_title">Ваша заявка успешно отправлена!</h2>
+                
+                    <div class="confirmation_client">
+                        <p>Спасибо, <span>{{ name }}</span>, что выбрали нас! </p>
+                    </div>
+                
+                    <div class="confirmation_message">
+                        <p>Наш мастер подтвердит вашу заявку в течение <span>двух часов.</span></p>
+                        <p>Мы приложим все усилия, чтобы сделать ваш визит приятным и комфортным.</p>
+                        <p>В случае возникновения вопросов, мы свяжемся с вами по указанному номеру телефона <span> +{{phone}}</span>.</p>
+                        <p>Проверить статус записи можно самостоятельно по 
+                            <a href="{% url 'verify' %}" class="confirmation_record_link">ссылке</a>.
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+    </section>
+
+    <script src="{% static 'barbershop/js/main.js' %}"></script>      
+    <script src="{% static 'barbershop/js/textwritter.js' %}"></script>  
+
+    
+
+</main>
+
+{% endblock main %}
+

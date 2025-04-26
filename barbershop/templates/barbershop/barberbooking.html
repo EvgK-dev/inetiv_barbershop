@@ -1,0 +1,181 @@
+{% extends 'barbershop/base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<main class="main">   
+    <section class="booking">
+        <section class="booking_conteiner">
+            <div class="wrapper">
+
+                 <div class="block_title animation-bottom-to-up">
+                    <img loading="lazy" src="{% static 'barbershop/img/services/icons_line1.png' %}" alt="inetiv.com">
+                    <h2 class="block_title_main_text">БРОНИРУЙ СЕЙЧАС</h2>
+                    <h4 class="block_title_second_text">Простой выбор мастера, услуги и времени</h4>
+                    <img loading="lazy" src="{% static 'barbershop/img/services/icons_line2.png' %}" alt="inetiv.com_line2">
+                    <a href="{% url 'verify' %}" class="checking_record_link"> ♦️ Нажмите, чтобы проверить свою запись</a>
+                </div>
+
+                <section class="booking_block">
+                    {% for master in masters %}
+                    <div class="booking_masters_block" id="Master_{{ master.id }}">
+
+                        <section class="book_master_block">
+                            <div class="book_master_img animation-bottom-to-up">
+                                <img loading="lazy" class="animation-bottom-to-up" src="{{ master.avatar.url }}" alt="inetiv.com"> 
+                            </div> 
+                            
+                            <div class="book_master_name">
+                                <p data-master>{{ master.name }}</p> 
+                            </div>
+        
+                            <p class="book_master_position">{{ master.specialty }}</p> 
+        
+                            <div class="book_master_social_network">
+                                <a href="tel:{{ master.contact_set.first.phone }}"><img src="{% static 'barbershop/img/masters/icons-телефон.png' %}" alt="inetiv.com"></a>
+                                <a href="{{ master.contact_set.first.telegram }}"><img src="{% static 'barbershop/img/masters/icons-телеграм.png' %}" alt="inetiv.com"></a>
+                                <a href="{{ master.contact_set.first.instagram }}"><img src="{% static 'barbershop/img/masters/icons-instagram.png' %}" alt="inetiv.com"></a>
+                                <a href="{{ master.contact_set.first.tiktok }}"><img src="{% static 'barbershop/img/masters/icons-тикток.png' %}" alt="inetiv.com"></a>
+                            </div>
+        
+                            <button class="book_button" data-action="select-master">
+                                <img loading="lazy" src="{% static 'barbershop/img/booking/arrow_black.png' %}" alt="inetiv.com_arrow">
+                                <p >нажмите для выбора</p>
+                            </button>
+                        </section>
+                
+                        <section class="booking_services none">
+                            <button class="book_button" data-action="back-to-masters">
+                                <img loading="lazy" src="{% static 'barbershop/img/booking/arrow_left.png' %}" alt="inetiv.com_arrow">
+                                <p >вернуться назад</p>
+                            </button>
+        
+                            <div class="book_services_container">
+                                {% for service in master.service_set.all %}
+                                    <div class="book_service">
+                                        <div class="book_service_info">
+                                            <div class="book_service_text" data-selected="false">
+                                                <div class="book_service_text_block">
+                                                    <p class="book_service_name" data-service-name>{{ service.service_name }}</p> 
+                                                    <p class="book_service_price">от <span data-price>{{ service.price }}</span> р, <span data-duration>{{ service.duration }}</span> минут</p> 
+                                                </div>
+                                                <div class="book_custom_checkbox"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+        
+                            <button class="book_button" data-action="next-to-calendar">
+                                <img loading="lazy" src="{% static 'barbershop/img/booking/finger_black.png' %}" alt="inetiv.com_arrow">
+                                <p >далее ...</p>
+                            </button>
+                        </section>
+                
+                        <section class="booking_calendar none">
+                            <button class="book_button" data-action="back-to-services">
+                                <img loading="lazy" src="{% static 'barbershop/img/booking/arrow_left.png' %}" alt="inetiv.com_arrow">
+                                <p >вернуться назад</p>
+                            </button>
+                
+                            <div class="book_calendar_inner_block">
+                                <div class="calendar" id="calendar_{{ master.id }}">
+                                    <!-- -->
+                                </div>
+
+                                <div class="times"  id="times_{{ master.id }}">
+                                    <p class="time_message">☝ Выберите дату</p>
+                                    <!-- -->
+                                </div>
+                            </div>
+                
+                            <button class="book_button" data-action="next-to-form">
+                                <img loading="lazy" src="{% static 'barbershop/img/booking/finger_black.png' %}" alt="inetiv.com_arrow">
+                                <p>далее ...</p>
+                            </button>
+                        </section>
+                    
+                        <section class="booking_form_section none">
+                            <button class="book_button" data-action="back-to-calendar">
+                                <img loading="lazy" src="{% static 'barbershop/img/booking/arrow_left.png' %}" alt="inetiv.com_arrow">
+                                <p>вернуться назад</p>
+                            </button>
+                
+                            <div class="book_contact_form_block">
+                                <div class="book_feedback_form_container">
+
+                                    <div class="book_form_container">
+                                        <img loading="lazy" class="feedback_form_icon" src="{% static 'barbershop/img/form-icon.png' %}" alt="">
+                                        <form action="{% url 'send_booking_to_telegram' %}" class="book_form" method="post">
+                                            {% csrf_token %}
+                                            <div class="book_form_group">
+                                                <input type="text" id="name" name="name" placeholder="Введите своё имя" maxlength="20" required>
+                                            </div>
+                                            
+                                            <div class="book_form_group">
+                                                <input type="tel" id="phone" name="phone" placeholder="Укажите телефон" maxlength="20" pattern="^\+?\d+$" title="Номер телефона может содержать только цифры и знак плюс" required>
+
+                                            </div>
+                                    
+                                            <div class="book_form_group">
+                                                <input type="email" id="email" name="email" placeholder="Введите email" maxlength="100" required>
+                                            </div>
+                                    
+                                            <div class="book_form_group">
+                                                <input type="text" id="comment" name="comment" placeholder="Добавьте комментарий" maxlength="200">
+                                            </div>
+                                    
+
+                                            <div class="book_form_info_group">
+                                                <div class="book_form_info">
+                                                    <div class="book_form_input_container">Дата: <input type="text" id="date" name="date" value="" readonly></div>
+                                                    <div class="book_form_input_container">Время: <input type="text" id="time" name="time" value="" readonly></div>
+                                                </div>
+                                            
+                                                <div class="book_form_info">
+                                                    <div class="book_form_input_container">Мастер: <input type="text" id="master" name="master" value="{{ master.name }}" readonly></div>
+                                                </div>
+                                            
+                                                <div class="book_form_info">
+                                                    <div class="book_form_input_container">Услуга: <input type="text" id="service" name="service" value="" readonly></div>
+                                                </div>
+                                            
+                                                <div class="book_form_info">
+                                                    <div class="book_form_input_container">~<input type="text" id="duration" name="duration" value="" readonly></div>
+                                                    <div class="book_form_input_container">~ <input type="text" id="cost" name="cost" value="" readonly></div>
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" id="master_id" name="master_id" value="{{ master.id }}" readonly>
+                                            
+                                            <button class="book_form_button" type="submit">ЗАКАЗАТЬ</button>
+                                        </form>
+                                    </div>
+                                    
+
+                                    <img loading="lazy" class="feedback_form_icon" src="{% static 'barbershop/img/form-icon.png' %}" alt="inetiv.com_line2">
+                
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    {% endfor %}
+
+                </section>
+                
+            </div>
+        </section>
+    </section>
+
+    <script src="{% static 'barbershop/js/main.js' %}"></script>    
+    <script src="{% static 'barbershop/js/booking.js' %}"></script>      
+    
+    <script src="{% static 'barbershop/js/textwritter.js' %}"></script>  
+    <script src="{% static 'barbershop/js/delayedLoading.js' %}"></script>  
+    
+
+</main>
+
+{% endblock main %}
+

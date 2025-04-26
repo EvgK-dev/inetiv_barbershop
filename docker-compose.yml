@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  django:
+    container_name: barbershop_django
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8020:8020"
+    volumes:
+      - barbershop_data:/app/media
+      - static_data:/app/static
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      barbershop_network:
+        ipv4_address: 172.247.1.10
+
+  bot:
+    container_name: barbershop_bot
+    build:
+      context: .
+      dockerfile: telegram_bot/Dockerfile
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - django
+    networks:
+      barbershop_network:
+        ipv4_address: 172.247.1.11
+
+  db:
+    container_name: barbershop_db
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      barbershop_network:
+        ipv4_address: 172.247.1.12
+
+networks:
+  barbershop_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.247.1.0/25
+
+volumes:
+  barbershop_data:
+  static_data:
+  postgres_data:
